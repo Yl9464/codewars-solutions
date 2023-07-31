@@ -1,36 +1,20 @@
 #!/usr/bin/env python3
 import re
 def string_generator(pattern):
-    tokens = ['INC_INT', 'INC_FLOAT', 'INTERVAL', 'PERIODIC']
-    tokes = []
-    pt_tokes = []
+    input = ['INC_INT', 'INC_FLOAT', 'INTERVAL', 'PERIODIC']
+
     
     for pat in pattern.split():
         if '[' in pat:
-            tokes.append(pat)
-    for toke in tokes:
-        if not toke[0] == '[' and toke[0].isupper():
-            lower_case = toke[0].lower()
-            low = toke.replace(toke[0],lower_case)
-            lowered = [*low]
-            for l in lowered: 
-                if l == '[':
-                    pt_tokes.append(l)
-                if l.isupper():
-                    pt_tokes.append(l)
-                if l == '_':
-                    pt_tokes.append(l)
-                if l == ']':
-                    pt_tokes.append(l)
-        else: 
-            pt_tokes.append(toke)
-    print(''.join(pt_tokes))
+            tokens = re.findall('\[.*\]', pat)
+            print(tokens)
+
     
 string_generator("Hello World[INC_INT]!")
 #["Hello World1!", "Hello World2!", "Hello World3!", "Hello World4!", "Hello World5!"]
 string_generator("I have [INC_INT=3,2] dogs")
 #["I have 3 dogs", "I have 5 dogs", "I have 7 dogs", "I have 9 dogs", "I have 11 dogs", "I have 13 dogs"],
-#string_generator("[INC_FLOAT=2.3,0.000100]")
+string_generator("[INC_FLOAT=2.3,0.000100]")
 #["2.300000", "2.300100", "2.300200", "2.300300", "2.300400", "2.300500", "2.300600", "2.300700", "2.300800", "2.300900", "2.301000", "2.301100"],
 
 #string_generator("Season [PERIODIC=1,4], Episode [INTERVAL=1,4]")
