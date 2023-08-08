@@ -9,7 +9,6 @@ def string_generator(pattern):
             tokens = re.findall('\[.*\]', pat)
             print(tokens)
 
-    
 string_generator("Hello World[INC_INT]!")
 #["Hello World1!", "Hello World2!", "Hello World3!", "Hello World4!", "Hello World5!"]
 string_generator("I have [INC_INT=3,2] dogs")
